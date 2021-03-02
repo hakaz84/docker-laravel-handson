@@ -20,7 +20,8 @@ class ShopController extends Controller
    public function myCart()
    {
        $my_carts = Cart::all();
-       return view('mycarts',compact('my_carts'));
+       print_r($my_carts);exit();
+       return view('mycart',compact('my_carts'));
        
    }
     //

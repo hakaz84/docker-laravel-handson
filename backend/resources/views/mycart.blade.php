@@ -12,8 +12,9 @@
                @foreach($my_carts as $my_cart)
                     {{$my_cart->stock_id}}<br>
                     {{$my_cart->user_id}}<br>
+                    
                @endforeach
-
+               
               
              
          </div>
