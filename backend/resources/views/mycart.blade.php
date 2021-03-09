@@ -15,7 +15,7 @@
                        <div class="mycart_box">
                            <p>ユーザーID：{{$my_cart->user_id}}</p>
                            <p>ストックID：{{$my_cart->stock_id}}</p>
-                       <>/div
+                       </div>
                    @endforeach
 
                </div>

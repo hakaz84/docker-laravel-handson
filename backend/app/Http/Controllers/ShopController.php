@@ -28,6 +28,7 @@ class ShopController extends Controller
    public function addMycart(Request $request)
    {
        $user_id = Auth::id(); 
+       
        $stock_id=$request->stock_id;
 
        $cart_add_info=Cart::firstOrCreate(['stock_id' => $stock_id,'user_id' => $user_id]);
