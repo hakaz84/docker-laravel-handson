@@ -18,3 +18,7 @@ Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
 Route::post('/mycart', 'ShopController@addMycart');
 Auth::routes();
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

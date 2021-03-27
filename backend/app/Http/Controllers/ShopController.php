@@ -19,7 +19,7 @@ class ShopController extends Controller
 
    public function myCart()
    {
-       $my_carts = Cart::all();
+       $my_carts = Auth::id();
        
        return view('mycart',compact('my_carts'));
        
