@@ -10,6 +10,7 @@ class Cart extends Model
     protected $fillable = [
         'stock_id', 'user_id',
     ];
+
     public function showCart()
    {
        $user_id = Auth::id();
@@ -26,15 +27,18 @@ class Cart extends Model
        
    
    }
+
    public function myCart(Cart $cart)
    {
        $my_carts = $cart->showCart();
        return view('mycart',compact('my_carts'));
    }
+
    public function stock()
    {
        return $this->belongsTo('\App\Models\Stock');
    }
+
    public function addCart($stock_id)
    {
        $user_id = Auth::id(); 
@@ -50,6 +54,7 @@ class Cart extends Model
        return $message;
 
    }
+
    public function deleteCart($stock_id)
    {
        $user_id = Auth::id(); 
@@ -61,6 +66,15 @@ class Cart extends Model
            $message = '削除に失敗しました';
        }
        return $message;
-    }
+    }    
+
+    public function checkoutCart()
+       {
+           $user_id = Auth::id(); 
+           $checkout_items=$this->where('user_id', $user_id)->get();
+           $this->where('user_id', $user_id)->delete();
+    
+           return $checkout_items;     
+       }
 }
 

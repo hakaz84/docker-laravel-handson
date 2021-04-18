@@ -27,35 +27,12 @@ class ShopController extends Controller
 
    public function addMycart(Request $request,Cart $cart)
    {
-       $user_id = Auth::id(); 
-       
-       $stock_id=$request->stock_id;
-
-       $cart_add_info=Cart::firstOrCreate(['stock_id' => $stock_id,'user_id' => $user_id]);
-       
-
-       if($cart_add_info->wasRecentlyCreated){
-           $message = 'カートに追加しました';
-       }
-       else{
-           $message = 'カートに登録済みです';
-       }
-
-       $my_carts = Cart::where('user_id',$user_id)->get();
-
-       return view('mycart',compact('my_carts' , 'message'));
-
        //カートに追加の処理
        $stock_id=$request->stock_id;
        $message = $cart->addCart($stock_id);
-
        //追加後の情報を取得
-       $my_carts = $cart->showCart();
-
-       return view('mycart',$data)->with('message',$message);
-
-
-       
+       $data = $cart->showCart();
+       return view('mycart',$data)->with('message',$message); //追記
    }
 
    public function deleteCart(Request $request,Cart $cart)
@@ -66,7 +43,7 @@ class ShopController extends Controller
            $message = $cart->deleteCart($stock_id);
     
            //追加後の情報を取得
-           $my_carts = $cart->showCart();
+           $data = $cart->showCart();
     
            return view('mycart',$data)->with('message',$message);
     
@@ -74,17 +51,8 @@ class ShopController extends Controller
 
     public function checkout(Cart $cart)
        {
-           $checkout_info = $cart->checkoutCart();       
+           $checkout_info = $cart->checkoutCart();
            return view('checkout');
-       }
-
-    public function checkoutCart()
-       {
-           $user_id = Auth::id(); 
-           $checkout_items=$this->where('user_id', $user_id)->get();
-           $this->where('user_id', $user_id)->delete();
-    
-           return $checkout_items;     
        }
     
     
