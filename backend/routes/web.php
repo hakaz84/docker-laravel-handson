@@ -24,3 +24,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::POST('/cartdelete','ShopController@deleteCart');
+
+Route::post('/checkout', 'ShopController@checkout');

@@ -20,9 +20,10 @@ class ShopController extends Controller
    public function myCart(Cart $cart)
    {
         $data = $cart->showCart();
-        return view('mycart',$data)->with('message',$message);
- 
+        return view('mycart',$data);
+        
    }
+   
 
    public function addMycart(Request $request,Cart $cart)
    {
@@ -51,7 +52,7 @@ class ShopController extends Controller
        //追加後の情報を取得
        $my_carts = $cart->showCart();
 
-       return view('mycart',compact('my_carts' , 'message'));
+       return view('mycart',$data)->with('message',$message);
 
 
        
@@ -70,6 +71,22 @@ class ShopController extends Controller
            return view('mycart',$data)->with('message',$message);
     
        }
-   
+
+    public function checkout(Cart $cart)
+       {
+           $checkout_info = $cart->checkoutCart();       
+           return view('checkout');
+       }
+
+    public function checkoutCart()
+       {
+           $user_id = Auth::id(); 
+           $checkout_items=$this->where('user_id', $user_id)->get();
+           $this->where('user_id', $user_id)->delete();
+    
+           return $checkout_items;     
+       }
+    
+    
     //
 }

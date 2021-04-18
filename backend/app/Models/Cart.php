@@ -21,7 +21,9 @@ class Cart extends Model
            $data['count']++;
            $data['sum'] += $my_cart->stock->fee;
        }
+       
        return $data;
+       
    
    }
    public function myCart(Cart $cart)
