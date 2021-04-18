@@ -28,11 +28,7 @@ class Cart extends Model
    
    }
 
-   public function myCart(Cart $cart)
-   {
-       $my_carts = $cart->showCart();
-       return view('mycart',compact('my_carts'));
-   }
+  
 
    public function stock()
    {
